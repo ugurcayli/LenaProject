@@ -1,0 +1,135 @@
+﻿@model IEnumerable<LenaProject.Form>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Yeni Form Ekle
+</button>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Yeni Form</h4>
+            </div>
+            <div class="modal-body">
+                @*@using (Html.BeginForm("Index", "Form", FormMethod.Post))
+                    {*@
+
+                <div class="form col">
+
+                    <div class="form-group">
+                        <label for="name">Name :</label>
+                        <input class="form-control" id="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="descreption">Description:</label>
+                        <input class="form-control" id="Description">
+                    </div>
+
+                </div>
+
+                @*}*@
+
+            </div>
+
+            <div class="modal-footer">
+                <a id="sendBtn" class="btn btn-default">Kaydet</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br /><br />
+<table class="table table-bordered table-hover table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(a => a.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(a => a.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(a => a.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(a => a.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(a => a.CreatedBy)
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(a => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(a => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(a => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(a => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(a => item.User.Name)   @Html.DisplayFor(a => item.User.Surname)
+            </td>
+            <td>
+                <a href="/Form/Edit/@item.Id">Düzenle </a>
+
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var index = 0;
+    var form_index = 0;
+    $("#dynamic_btn").click(function () {
+        $("#dynamic_div").append("<div id=dynamic_" + index + " class='container row'><div class='form-group'><label for='email'>Field Adı:</label><input type='email' class='form-control' id='Name'></div><div class='form-group col-md-2'>Zorunlu mu ?<select><option value='true'>Evet</option><option value='false'>Hayır</option></select></div><div class='form-group col-md-2'>Data Type ?<select><option value='string'>String</option><option value='number'>Number</option></select></div></div><br/>");
+        index++;
+    });
+
+    $("#save_btn").click(function () {
+        $("#dynamic_:input").each(function () {
+        });
+    });
+    $("#sendBtn").click(function () {
+        debugger;
+        var action = '/Form/Index';
+        $.ajax({
+            type: "POST",
+            url: action,
+            data: { Name: $("#Name").val(), Description: $("#Description").val() },
+            success: function (result) {
+                debugger;
+                window.location.href = '/Form/Index/';
+
+            },
+            error: function (result) {
+                debugger;
+                alert('Oh no :(');
+            }
+        });
+    });
+
+</script>

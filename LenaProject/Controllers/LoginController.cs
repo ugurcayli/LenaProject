@@ -13,6 +13,10 @@ namespace LenaProject.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            if (Session["userId"] != null)
+            {
+                return RedirectToAction("Index", "Form");
+            }
             return View();
         }
         [AllowAnonymous]
@@ -20,11 +24,19 @@ namespace LenaProject.Controllers
         public ActionResult Index(LoginModel model)
         {
             UserServices userServices = new UserServices();
-            if (userServices.LoginService(model))
+            var user = userServices.LoginService(model);
+            Session["userId"] = user.Id;
+            if (user != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Form");
             }
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session.RemoveAll();
+            return RedirectToAction("Index", "Login");
         }
     }
 }

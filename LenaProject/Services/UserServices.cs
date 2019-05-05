@@ -9,16 +9,12 @@ namespace LenaProject.Services
     public class UserServices
     {
 
-        LenaProjectDBEntities db = new LenaProjectDBEntities() ;
+        LenaProjectDBEntities_ db = new LenaProjectDBEntities_() ;
 
-        public bool LoginService(LoginModel login)
+        public User LoginService(LoginModel login)
         {
             var result = db.Users.Where(a => a.UserName == login.UserName && a.Password == login.Password).FirstOrDefault();
-            if (result!=null)
-            {
-                return true;
-            }
-            return false;
+            return result;
         }
     }
 

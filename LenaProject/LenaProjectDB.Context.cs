@@ -13,10 +13,10 @@ namespace LenaProject
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LenaProjectDBEntities : DbContext
+    public partial class LenaProjectDBEntities_ : DbContext
     {
-        public LenaProjectDBEntities()
-            : base("name=LenaProjectDBEntities")
+        public LenaProjectDBEntities_()
+            : base("name=LenaProjectDBEntities_")
         {
         }
     
@@ -25,8 +25,8 @@ namespace LenaProject
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Field> Fields { get; set; }
         public virtual DbSet<Form> Forms { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Field> Fields { get; set; }
     }
 }

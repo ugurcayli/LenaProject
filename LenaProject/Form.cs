@@ -17,7 +17,9 @@ namespace LenaProject
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public System.DateTime CreatedAt { get; set; }
-        public int CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
+    
+        public virtual User User { get; set; }
     }
 }
