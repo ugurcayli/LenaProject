@@ -1,0 +1,29 @@
+﻿@model LenaProject.Models.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@using (Html.BeginForm("Index", "Login", FormMethod.Post))
+{
+
+<div class="form col">
+
+    <div class="form-group">
+        @Html.LabelFor(f => f.UserName)
+        @Html.TextBoxFor(f => f.UserName, new { title = "Kullanıcı adınızı giriniz.", @Value = @ViewBag.user,placeholder = "Kullanıcı adını giriniz", @class="form-control"})
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(f => f.Password)
+        @Html.PasswordFor(f => f.Password, new { title = "Kullanıcı şifrenizi giriniz.", @Value = @ViewBag.password,placeholder ="Şİfrenizi giriniz",@class="form-control" })
+
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Giriş</button><br class="cl" />
+
+</div>
+
+}                   
