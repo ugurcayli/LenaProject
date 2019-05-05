@@ -8,7 +8,7 @@ namespace LenaProject.Services
     public class FormServices
     {
         LenaProjectDBEntities_ db = new LenaProjectDBEntities_();
-        public List<Form> GetFormList()
+        public IEnumerable<Form> GetFormList()
         {
             var result = db.Forms.ToList();
             return result;
@@ -38,6 +38,12 @@ namespace LenaProject.Services
                 db.SaveChanges();
             }
             return currentForm;
+        }
+
+        public IEnumerable<Form> filter()
+        {
+            var result = db.Forms.ToList();
+            return result;
         }
 
     }
